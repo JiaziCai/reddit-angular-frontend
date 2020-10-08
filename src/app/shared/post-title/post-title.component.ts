@@ -1,27 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { PostService } from '../post.service';
 import { PostModel } from '../post-model';
-import {
-  faArrowUp,
-  faArrowDown,
-  faComments,
-} from '@fortawesome/free-solid-svg-icons';
+import { faComments } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-title',
   templateUrl: './post-title.component.html',
   styleUrls: ['./post-title.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class PostTitleComponent implements OnInit {
   posts$: Array<PostModel>;
-  faArrowUp = faArrowUp;
-  faArrowDown = faArrowDown;
   faComments = faComments;
-  constructor(private postService: PostService) {
+
+  constructor(private postService: PostService, private router: Router) {
     this.postService.getAllPosts().subscribe((post) => {
       this.posts$ = post;
     });
   }
 
   ngOnInit(): void {}
+
+  goToPost(id: number): void {
+    this.router.navigateByUrl('/view-post/' + id);
+  }
 }

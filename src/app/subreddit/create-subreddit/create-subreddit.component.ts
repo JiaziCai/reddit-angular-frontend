@@ -24,14 +24,13 @@ export class CreateSubredditComponent implements OnInit {
       title: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
     });
-
     this.subredditModel = {
       name: '',
       description: '',
     };
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {}
 
   discard() {
     this.router.navigateByUrl('/');
