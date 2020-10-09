@@ -6,20 +6,18 @@ import { throwError } from 'rxjs';
 @Component({
   selector: 'app-list-subreddits',
   templateUrl: './list-subreddits.component.html',
-  styleUrls: ['./list-subreddits.component.css'],
+  styleUrls: ['./list-subreddits.component.css']
 })
 export class ListSubredditsComponent implements OnInit {
+
   subreddits: Array<SubredditModel>;
-  constructor(private subredditService: SubredditService) {}
+  constructor(private subredditService: SubredditService) { }
 
   ngOnInit() {
-    this.subredditService.getAllSubreddits().subscribe(
-      (data) => {
-        this.subreddits = data;
-      },
-      (error) => {
-        throwError(error);
-      }
-    );
+    this.subredditService.getAllSubreddits().subscribe(data => {
+      this.subreddits = data;
+    }, error => {
+      throwError(error);
+    })
   }
 }
